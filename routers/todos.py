@@ -51,7 +51,7 @@ async def add_new_todo(request: Request):
 
 
 @router.post("/add-todo", response_class=HTMLResponse)
-async def create_todo(request: Request, title: str = Form(), description: str = Form(), priority: str = Form(), db: Session = Depends(get_db)):
+async def create_todo(request: Request, title: str = Form(...), description: str = Form(...), priority: str = Form(...), db: Session = Depends(get_db)):
     user  = await get_current_user(request)
     if not user:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
@@ -82,7 +82,7 @@ async def edit_todo(request: Request, todo_id: int, db: Session = Depends(get_db
 
 
 @router.post("/edit-todo/{todo_id}", response_class=HTMLResponse)
-async def edit_todo(request: Request, todo_id: int, title: str = Form(), description: str = Form(), priority: str = Form(), db: Session = Depends(get_db)):
+async def edit_todo(request: Request, todo_id: int, title: str = Form(...), description: str = Form(...), priority: str = Form(...), db: Session = Depends(get_db)):
     user  = await get_current_user(request)
     if not user:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)
