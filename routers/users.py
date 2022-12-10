@@ -53,8 +53,8 @@ async def change(request: Request):
 
 
 @router.post("/change-password", response_class=HTMLResponse)
-async def change_password(request: Request, username: str = Form(), oldpassword: str = Form(),
-                newpassword: str = Form(), db: Session = Depends(get_db)):
+async def change_password(request: Request, username: str = Form(...), oldpassword: str = Form(...),
+                newpassword: str = Form(...), db: Session = Depends(get_db)):
     user  = await get_current_user(request)
     if not user:
         return RedirectResponse(url="/auth", status_code=status.HTTP_302_FOUND)

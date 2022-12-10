@@ -157,9 +157,9 @@ async def register(request: Request):
 
 
 @router.post("/register", response_class=HTMLResponse)
-async def register_user(request: Request, email: str = Form(), username: str = Form(),
-                firstname: str = Form(), lastname: str = Form(), password: str = Form(),
-                password2: str = Form(), db: Session = Depends(get_db)):
+async def register_user(request: Request, email: str = Form(...), username: str = Form(...),
+                firstname: str = Form(...), lastname: str = Form(...), password: str = Form(...),
+                password2: str = Form(...), db: Session = Depends(get_db)):
 
     validation1 = db.query(models.Users).filter(models.Users.username == username).first()
     validation2 = db.query(models.Users).filter(models.Users.email == email).first()
